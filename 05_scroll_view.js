@@ -7,7 +7,7 @@ const logo = {
   height: 72,
 };
 
-const App = () => (
+const ScrollView = () => (
   <ScrollView>
     <Text style={{fontSize: 64}}>Scroll Me</Text>
     <Image source={logo} />
@@ -25,4 +25,4 @@ const App = () => (
   </ScrollView>
 );
 
-export default App;
+export default ScrollView;
