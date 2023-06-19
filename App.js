@@ -11,9 +11,15 @@ const FlexDirectionBasics = () => {
       values={['column', 'row', 'row-reverse', 'column-reverse']}
       selectedValue={flexDirection}
       setSelectedValue={setflexDirection}>
-      <View style={[styles.box, {backgroundColor: 'powderblue'}]} />
-      <View style={[styles.box, {backgroundColor: 'skyblue'}]} />
-      <View style={[styles.box, {backgroundColor: 'steelblue'}]} />
+      <View style={[styles.box, {backgroundColor: 'powderblue', justifyContent: 'center'}]}>
+        <Text style={{textAlign: 'center'}}>A</Text>
+      </View>
+      <View style={[styles.box, {backgroundColor: 'skyblue', justifyContent: 'center'}]}>
+        <Text style={{textAlign: 'center'}}>B</Text>
+      </View>
+      <View style={[styles.box, {backgroundColor: 'steelblue', justifyContent: 'center'}]}>
+        <Text style={{textAlign: 'center'}}>C</Text>
+      </View>
     </PreviewLayout>
   );
 };
