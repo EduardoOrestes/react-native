@@ -1,19 +1,25 @@
 import React, {useState} from 'react';
-import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import type {PropsWithChildren} from 'react';
 
-const DirectionLayout = () => {
-  const [direction, setDirection] = useState('ltr');
+const FlexDirectionBasics = () => {
+  const [flexDirection, setflexDirection] = useState('column');
 
   return (
     <PreviewLayout
-      label="Direction LABEL"
-      values={['ltr', 'rtl']}
-      selectedValue={direction}
-      setSelectedValue={setDirection}>
-      <View style={[styles.box, {backgroundColor: 'powderblue'}]} />
-      <View style={[styles.box, {backgroundColor: 'skyblue'}]} />
-      <View style={[styles.box, {backgroundColor: 'steelblue'}]} />
+      label="flexDirection"
+      values={['column', 'row', 'row-reverse', 'column-reverse']}
+      selectedValue={flexDirection}
+      setSelectedValue={setflexDirection}>
+      <View style={[styles.box, {backgroundColor: 'powderblue', justifyContent: 'center'}]}>
+        <Text style={{textAlign: 'center'}}>A</Text>
+      </View>
+      <View style={[styles.box, {backgroundColor: 'skyblue', justifyContent: 'center'}]}>
+        <Text style={{textAlign: 'center'}}>B</Text>
+      </View>
+      <View style={[styles.box, {backgroundColor: 'steelblue', justifyContent: 'center'}]}>
+        <Text style={{textAlign: 'center'}}>C</Text>
+      </View>
     </PreviewLayout>
   );
 };
@@ -32,27 +38,25 @@ const PreviewLayout = ({
   selectedValue,
   setSelectedValue,
 }: PreviewLayoutProps) => (
-  <View style={{padding: 10, flex: 1, marginTop: 20}}>
+  <View style={{padding: 10,flex: 1}}>
     <Text style={styles.label}>{label}</Text>
-
     <View style={styles.row}>
       {values.map(value => (
         <TouchableOpacity
           key={value}
           onPress={() => setSelectedValue(value)}
-          style={[styles.button, selectedValue == value && styles.selected]}>
+          style={[styles.button, selectedValue === value && styles.selected]}>
             <Text
               style={[
                 styles.buttonLabel,
-                selectedValue === value && styles.selectedLabel
+                selectedValue === value && styles.selectedLabel,
               ]}>
-              {value}
-            </Text>
+                {value}
+              </Text>
           </TouchableOpacity>
       ))}
     </View>
-
-    <View style={[styles.container, {[label]: selectedValue}]}>
+    <View style={[styles.container,{[label]: selectedValue}]}>
       {children}
     </View>
   </View>
@@ -62,7 +66,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 8,
-    backgroundColor: 'aliceblue'
+    backgroundColor: 'aliceblue',
   },
   box: {
     width: 50,
@@ -102,4 +106,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DirectionLayout;
+export default FlexDirectionBasics;
