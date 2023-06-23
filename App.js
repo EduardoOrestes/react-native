@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     height: 80,
   },
   row: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     flexWrap: 'wrap',
   },
   button: {
