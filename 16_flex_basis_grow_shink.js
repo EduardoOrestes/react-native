@@ -102,7 +102,7 @@ const BoxInfo = ({
     </View>
 
     <Text style={styles.label}>
-      flexBasics
+      flexBasis
     </Text>
     <TextInput
       value={String(flexBasis)}
