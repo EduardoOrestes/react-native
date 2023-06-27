@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     borderRadius: 4,
     backgroundColor: 'oldlace',
-    alignSef: 'flex-start',
+    alignSelf: 'flex-start',
     marginHorizontal: '1%',
     marginBottom: 6,
     minWidth: '48%',

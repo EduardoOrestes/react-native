@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {View, Image, TouchableOpacity, Text, StyleSheet} from 'react-native';
 import type {PropsWithChildren} from 'react';
 
 const PositionLayout = () => {
@@ -83,6 +83,9 @@ const PreviewLayout =({
             ))}
         </View>
         <View style={styles.container}>{children}</View>
+        <View style={styles.contentLogo}>
+            <Image source={require('./img/logo-react.png')} style={styles.logo} />
+        </View>
     </View>
 );
 
@@ -129,6 +132,15 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         fontSize: 24,
     },
+    contentLogo: {
+        flex: 1,
+        width: '100%',
+        textAlign: 'center',
+    },
+    logo: {
+        width: 50,
+        height: 50,
+    }
 });
 
 export default PositionLayout;
