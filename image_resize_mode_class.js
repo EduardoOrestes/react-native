@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Image, StyleSheet, Text} from 'react-native';
+import {View, Image, Text, StyleSheet} from 'react-native';
 
 const DisplayAnImageWithStyle = () => {
   return (
@@ -7,58 +7,72 @@ const DisplayAnImageWithStyle = () => {
       <View>
         <Image
           style={{
-            borderTopRightRadius: 20,
+            resizeMode: 'cover',
             height: 100,
             width: 200,
           }}
           source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}
         />
         <Text>
-          borderTopRightRadius
+          resizeMode : cover
         </Text>
       </View>
 
       <View>
         <Image
           style={{
-            borderBottomRightRadius: 20,
+            resizeMode: 'contain',
             height: 100,
             width: 200,
           }}
           source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}
         />
         <Text>
-          borderBottomRightRadius
+          resizeMode : contain
         </Text>
       </View>
 
       <View>
         <Image
           style={{
-            borderBottomLeftRadius: 20,
+            resizeMode: 'stretch',
             height: 100,
             width: 200,
           }}
           source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}
         />
         <Text>
-          borderBottomLeftRadius
+          resizeMode : stretch
         </Text>
       </View>
 
       <View>
         <Image
           style={{
-            borderTopLeftRadius: 20,
+            resizeMode: 'repeat',
             height: 100,
             width: 200,
           }}
           source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}
         />
         <Text>
-          borderTopLeftRadius
+          resizeMode : repeat
         </Text>
       </View>
+
+      <View>
+        <Image
+          style={{
+            resizeMode: 'center',
+            height: 100,
+            width: 200,
+          }}
+          source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}
+        />
+      </View>
+      <Text>
+        resizeMode : center
+      </Text>
     </View>
   );
 };
