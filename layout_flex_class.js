@@ -47,8 +47,7 @@ const App = () => {
 
   const changeSetting = (
     value: number,
-    // options: readonly unknown[],
-    options: [],
+    options: readonly unknown[],
     setterFunction: (index: number) => void,
   ) => {
     if (value === options.length -1) {

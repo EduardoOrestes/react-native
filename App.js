@@ -61,9 +61,11 @@ const App = () => {
   return (
     <>
       <View style={{paddingTop: StatusBar.currentHEight}} />
+
       <View style={[styles.container, styles.playingSpace, hookedStyles]}>
         {squares.map(elem => elem)}
       </View>
+
       <ScrollView style={styles.container}>
         <View style={styles.controlSpace}>
           <View style={styles.buttonView}>
@@ -77,6 +79,7 @@ const App = () => {
               {flexDirections[flexDirection]}
             </Text>
           </View>
+
           <View style={styles.buttonView}>
             <Button
               title="ChangeJustify Content"
@@ -92,6 +95,7 @@ const App = () => {
               {justifyContents[justifyContent]}
             </Text>
           </View>
+
           <View style={styles.buttonView}>
             <Button
               title="Change Align Items"
@@ -103,6 +107,7 @@ const App = () => {
               {alignItemsArr[alignItems]}
             </Text>
           </View>
+
           <View style={styles.buttonView}>
             <Button
               title="Change Direction"
@@ -112,6 +117,7 @@ const App = () => {
               {directions[direction]}
             </Text>
           </View>
+
           <View style={styles.text}>
             <Button
               title="Change Flex Wrap"
@@ -121,12 +127,14 @@ const App = () => {
               {wraps[wrap]}
             </Text>
           </View>
+
           <View style={styles.buttonView}>
             <Button
               title="Add Square"
               onPress={() => setSquares([...squares, <Square />])}
             />
           </View>
+
           <View style={styles.buttonView}>
             <Button
               title="Delete Square"
