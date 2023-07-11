@@ -1,98 +1,246 @@
 import React, {useState} from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {
+  FlatList,
+  Platform,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Switch,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import Slider from '@react-native-community/slider';
-import type {SliderProps} from '@react-native-community/slider';
 
-type ShadowPropSliderProps = SliderProps & {
-  label: string;
-};
-
-const ShadowPropSlider = ({label, value, ...props}:
-ShadowPropSliderProps) => {
-  return (
-    <>
-      <Text>
-        {label} ({value?.toFixed(2)})
-      </Text>
-      <Slider step={1} value={value} {...props} />
-    </>
-  );
-};
+const fontStyles = ['normal', 'italic'];
+const fontVariants = [
+  undefined,
+  'small-caps',
+  'oldstyle-nums',
+  'lining-nums',
+  'tabular-nums',
+  'proportional-nums',
+];
+const fontWeights = [
+  'normal',
+  'bold',
+  '100',
+  '200',
+  '300',
+  '400',
+  '500',
+  '600',
+  '700',
+  '800',
+  '900'
+];
+const textAlignments = [
+  'auto',
+  'left',
+  'right',
+  'center',
+  'justify',
+];
+const textDecorationLines = [
+  'none',
+  'underline',
+  'line-through',
+  'underline line-through',
+];
+const textDecorationStyles = [
+  'solid',
+  'double',
+  'dotted',
+  'dashed'
+];
+const textTransformations = [
+  'none',
+  'uppercase',
+  'lowercase',
+  'capitalize',
+];
+const textAlignmentsVertical = [
+  'auto',
+  'top',
+  'bottom',
+  'center',
+];
+const writingDirections = [
+  'auto',
+  'ltr',
+  'rtl',
+];
 
 const App = () => {
-  const [shadowOffsetWidth, setShadowOffsetWidth] = useState(0);
-  const [shadowOffsetHeight, setShadowOffsetHeight] = useState(0);
-  const [shadowRadius, setShadowRadius] = useState(0);
-  const [shadowOpacity, setShadowOpacity] = useState(0.1);
+  const [fontSize, setFontSize] = useState(10);
+  const [fontStyleIdx, setFontStyleIdx] = useState(0);
+  const [fontWeightIdx, setFontWeightIdx] = useState(0);
+  const [lineHeight, setLineHeight] = useState(10);
+  const [textAlignIdx, setTextAlignIdx] = useState(0);
+  const [textDecorationLineIdx, setTextDecorationLineIdx] = useState(0);
+  const [includeFontPadding, setIncludeFontPadding] = useState(false);
+  const [textVerticalAlignIdx, setTextVerticalAlignIdx] = useState(0);
+  const [fontVariantIdx, setFontVariantIdx] = useState(0);
+  const [letterSpacing,setLetterSpacing] = useState(0);
+  const [textDecorationStyleIdx, setTextDecorationStyleIdx] = useState(0);
+  const [textTransformIdx, setTextTransformIdx] = useState(0);
+  const [writingDirectionIdx, setWritingDirectionIdx] = useState(0);
+  const [textShadowRadius, setTextShadowRadius] = useState(0);
+  const [textShadowOffset, setTextShadowOffset] = useState({ height: 0, width: 0, });
+  const [, ...validFontVariants] = fontVariants;
 
   return (
     <View style={styles.container}>
-      <View
+      <Text
         style={[
-          styles.square,
+          styles.paragraph,
           {
-            shadowOffset: {
-              width: shadowOffsetWidth,
-              height: -shadowOffsetHeight,
-            },
-            shadowOpacity,
-            shadowRadius,
+            fontSize,
+            fontStyle: fontStyles[fontStyleIdx],
+            fontWeight: fontWeights[fontWeightIdx],
+            lineHeight,
+            textAlign: textAlignments[textAlignIdx],
+            textDecorationLine: textDecorationLines[textDecorationLineIdx],
+            textTransform: textTransformations[textTransformIdx],
+            textAlignVertical: textAlignmentsVertical[textVerticalAlignIdx],
+            fontVariant: fontVariantIdx === 0 ? undefined : [validFontVariants[fontVariantIdx - 1]],
+            letterSpacing,
+            includeFontPadding,
+            textDecorationStyle: textDecorationStyles[textDecorationStyleIdx],
+            writingDirection: writingDirections[writingDirectionIdx],
+            textShadowOffset,
+            textShadowRadius,
           },
         ]}
-      />
-      <View style={styles.controls}>
-        <ShadowPropSlider
-          label="shadowOffset - x"
-          minimumValue={-50}
-          maximunValue={50}
-          value={shadowOffsetWidth}
-          onValueChange={setShadowOffsetWidth}
-        />
-        <ShadowPropSlider
-          label="shadowOffset - Y"
-          minimumValue={-50}
-          maximumValue={50}
-          value={shadowOffsetHeight}
-          onValueChange={setShadowOffsetHeight}
-        />
-        <ShadowPropSlider
-          label="shadowRadius"
-          minimumValue={0}
-          maximumValue={100}
-          value={shadowRadius}
-          onValueChange={setShadowRadius}
-        />
-        <ShadowPropSlider
-          label="shadowOpacity"
-          minimumValue={0}
-          maximumValue={1}
-          step={0.05}
-          value={shadowOpacity}
-          onValueChange={value => setShadowOpacity(val)}
-        />
-      </View>
+      >
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. 112 likes
+      </Text>
+
+      <ScrolView>
+        <View>
+          <Text>
+            Common platform properties
+          </Text>
+          <CustomSlider
+            label="Text Shadow Offset - Height"
+            value={textShadowOffset.height}
+            minimumValue={-40}
+            maximumValue={40}
+            handleValueChange={(val: number) => setTextShadowOffset(prev => ({...prev, height: val}))}
+          />
+          <CustomSlider
+            label="Text Shadow Offset - Width"
+            value={textShadowOffset.width}
+            minimumValue={-40}
+            maximumValue={40}
+            handleValueChange={(val: number) => setTextShadowOffset(prev => ({...prev, width: val}))}
+          />
+          <CustomSlider
+            label="Font Size"
+            value={fontSize}
+            maximumValue={40}
+            handleValueChange={setFontSize}
+          />
+          <CustomPicker
+            label="Font Style"
+            data={fontStyles}
+            currentIndex={fontStyleIdx}
+            onSelected={setFontStyleIdx}
+          />
+          <CustomPicker
+            label="Font Weights"
+            data={fontWeights}
+            currentIndex={fontWeightIdx}
+            onSelected={setFontWeigjhtIdx}
+          />
+          <CustomSlider
+            label="Line Height"
+            value={lineHeight}
+            minimumValue={10}
+            maximumValue={50}
+            handleValueChange={setLineHeight}
+          />
+          <CustomPicker
+            label="Text Align"
+            data={textAlignments}
+            currentIndex={textAlignIdx}
+            onSelected={setTextAlignIdx}
+          />
+          <CustomPicker
+            label="Text Decoration Line"
+            data={textDecorationLines}
+            currentIndex={textDecorationLineIdx}
+            onSelected={setTextDecorationLineIdx}
+          />
+          <CustomSlider
+            label="Text Shadow Radius"
+            value={textShadowRadius}
+            handleValueChange={setTextShadowRadius}
+          />
+          <CustomPicker
+            label="Font Variant"
+            data={fontVariants}
+            currentIndex={fontVariantIdx}
+            onSelected={setFontVariantIdx}
+          />
+          <CustomSlider
+            label="Letter Spacing"
+            step={0.1}
+            value={letterSpacing}
+            handleValueChange={setLetterSpacing}
+          />
+          <CustomPicker
+            label="Text Transform"
+            data={textTransformations}
+            currentIndex={textTransformIdx}
+            onSelected={setTextTransformIdx}
+          />
+        </View>
+
+        {Platform.OS === 'android' && (
+          <View style={styles.platformContainer}>
+            <Text style={styles.platformContainerTitle}>
+              Android only properties
+            </Text>
+            <CustomPicker
+              label="Text Vertical Align (just android)"
+              data={textAlignmentsVertical}
+              currentIndex={textVerticalAlignIdx}
+              onSelected={setTextVerticalAlignIdx}
+            />
+            <CustomSwitch
+              label="Include Font Padding"
+              handleValueChange={setIncludeFontPadding}
+              value={includeFontPadding}
+            />
+          </View>
+        )}
+        {Platform.OS === 'ios' && (
+          <View style={styles.platformContainer}>
+            <Text style={styles.platformContainerTitle}>
+              iOS only properties
+            </Text>
+            <CustomPicker
+              label="Text Decoration Style"
+              data={textDecorationStyles}
+              currentIndex={textDecorationStyleIdx}
+              onSelected={setTextDecorationStyleIdx}
+            />
+            <CustomPicker
+              label="Writing Direction"
+              data={writingDirections}
+              currentIndex={writingDirectionIdx}
+              onSelected={setWritingDirectionIdx}
+            />
+          </View>
+        )}
+      </ScrolView>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-around',
-    backgroundColor: '#ecf0f1',
-    padding: 8,
-  },
-  square: {
-    alignSelf: 'center',
-    backgroundColor: 'white',
-    borderRadius: 4,
-    height: 150,
-    shadowColor: 'black',
-    width: 150,
-  },
-  controls: {
-    paddingHorizontal: 12,
-  },
-});
-
-export default App;
+type CustomSwitchProps = {
+  label: string,
+  handleValueChange: (value: boolean) => void;
+  value: boolean;
+};
