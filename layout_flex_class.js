@@ -1,3 +1,5 @@
+// https://reactnative.dev/docs/layout-props
+
 import React, {useState} from 'react';
 import {
   Button,
