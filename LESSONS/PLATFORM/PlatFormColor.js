@@ -1,5 +1,3 @@
-// depois que acabar a sequencia, refresh controler
-
 import React from 'react';
 import {Platform, PlatformColor, StyleSheet, Text, View} from 'react-native';
 
